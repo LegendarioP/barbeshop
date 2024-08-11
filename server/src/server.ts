@@ -1,11 +1,15 @@
 import fastify from "fastify";
+import cors from '@fastify/cors'
+import { barbershopRoutes } from "./routes/barbershop";
 
 
 const app = fastify()
 
 
-app.get('/hello', () => {
-    return 'Hello World'
+app.register(barbershopRoutes)
+
+app.register(cors, {
+    origin: true
 })
 
 

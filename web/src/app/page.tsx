@@ -1,3 +1,4 @@
+import BarbershopItem from "@/components/barbershop-item";
 import Header from "@/components/header";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -6,8 +7,25 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import Image from "next/image";
+import { api } from "@/lib/api"
 
-export default function Home() {
+
+interface Barbarshop {
+    id:          string,         
+    name:        string,
+    address:     string,
+    phones:      string,
+    description: string,
+    imageUrl:    string,
+    createdAt:   Date,            
+    updatedAt:   Date
+}
+
+export default async function Home() {
+
+  const responseBarbershops = await api.get('/barbershops')
+  const barbershops: Barbarshop[] = responseBarbershops.data
+
   return (
     <div>
       <Header />
@@ -64,6 +82,14 @@ export default function Home() {
           </CardContent>
 
         </Card>
+
+
+        {barbershops.map(item => {
+          return(
+            <BarbershopItem key={item.id} barbershop={barbershops} />
+          )
+
+        })}
 
       </div>
     </div>
