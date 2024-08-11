@@ -8,23 +8,14 @@ import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import Image from "next/image";
 import { api } from "@/lib/api"
+import { Barbershop } from "@/data/barbershop";
 
 
-interface Barbarshop {
-    id:          string,         
-    name:        string,
-    address:     string,
-    phones:      string,
-    description: string,
-    imageUrl:    string,
-    createdAt:   Date,            
-    updatedAt:   Date
-}
 
 export default async function Home() {
 
   const responseBarbershops = await api.get('/barbershops')
-  const barbershops: Barbarshop[] = responseBarbershops.data
+  const barbershops: Barbershop[] = responseBarbershops.data
 
   return (
     <div>
@@ -83,13 +74,16 @@ export default async function Home() {
 
         </Card>
 
-
-        {barbershops.map(item => {
-          return(
-            <BarbershopItem key={item.id} barbershop={barbershops} />
-          )
-
-        })}
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+          Recomendados
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {barbershops.map(item => {
+            return(
+              <BarbershopItem key={item.id} barbershop={item} />
+            )
+          })}
+        </div>
 
       </div>
     </div>
