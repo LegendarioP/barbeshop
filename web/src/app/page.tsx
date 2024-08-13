@@ -5,10 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { SearchIcon } from "lucide-react";
+import { EyeIcon, FootprintsIcon, Link, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import { api } from "@/lib/api"
 import { Barbershop } from "@/data/barbershop";
+import { quickSearchOptions } from "@/data/search";
 
 
 
@@ -32,6 +33,28 @@ export default async function Home() {
           <Button>
             <SearchIcon />
           </Button>
+        </div>
+
+        {/* BUSCA RÁPIDA */}
+        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          {quickSearchOptions.map((option) => (
+            <Button
+              className="gap-2"
+              variant="secondary"
+              key={option.title}
+              asChild
+            >
+              <Link href={`/barbershops?service=${option.title}`}>
+                <Image
+                  src={option.imageUrl}
+                  width={16}
+                  height={16}
+                  alt={option.title}
+                />
+                {option.title}
+              </Link>
+            </Button>
+          ))}
         </div>
 
         {/* IMAGEM */}
@@ -85,7 +108,28 @@ export default async function Home() {
           })}
         </div>
 
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+          Recomendados
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {barbershops.reverse().map(item => {
+            return(
+              <BarbershopItem key={item.id} barbershop={item} />
+            )
+          })}
+        </div>
+
       </div>
+
+      <footer>
+          <Card>
+            <CardContent className="px-5 py-6">
+              <p className="text-sm text-gray-400">
+                © 2023 Copyright <span className="font-bold"> FSW Barber </span>
+              </p>
+            </CardContent>
+          </Card>
+      </footer>
     </div>
   );
 }
