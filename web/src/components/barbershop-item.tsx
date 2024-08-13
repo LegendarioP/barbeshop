@@ -14,7 +14,7 @@ export default async function BarbershopItem ({ barbershop }: BarbershopItemProp
 
     // const { name, id } = barbershop;
 
-    console.log(barbershop)
+    // console.log(barbershop)
     
     return (
         <Card className="min-w-[167px] rounded-2xl">
