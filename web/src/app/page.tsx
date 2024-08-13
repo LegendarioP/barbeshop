@@ -1,11 +1,9 @@
 import BarbershopItem from "@/components/barbershop-item";
 import Header from "@/components/header";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { EyeIcon, FootprintsIcon, Link, SearchIcon } from "lucide-react";
+import {Link, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import { api } from "@/lib/api"
 import { Barbershop } from "@/data/barbershop";
@@ -43,17 +41,14 @@ export default async function Home() {
               className="gap-2"
               variant="secondary"
               key={option.title}
-              asChild
             >
-              <Link href={`/barbershops?service=${option.title}`}>
-                <Image
-                  src={option.imageUrl}
-                  width={16}
-                  height={16}
-                  alt={option.title}
-                />
-                {option.title}
-              </Link>
+              <Image
+                src={option.imageUrl}
+                width={16}
+                height={16}
+                alt={option.title}
+              />
+              {option.title}
             </Button>
           ))}
         </div>

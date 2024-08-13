@@ -21,7 +21,10 @@ export async function barbershopRoutes(app: FastifyInstance) {
         const barbershop = await prisma.barbershop.findFirstOrThrow({
             where: {
                 id,
-            }
+            },
+            include: {
+                services: true,
+            },
         })
         return barbershop
     })
