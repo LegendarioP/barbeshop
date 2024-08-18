@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ChevronLeftIcon, MapPinIcon, MenuIcon, StarIcon } from "lucide-react"
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import PhoneItem from "@/components/phone-item";
+import ServiceItem from "@/components/service-item";
 
 
 interface BarbershopPageProps {
@@ -19,7 +20,7 @@ export default async function BarbershopPage({ params }: BarbershopPageProps) {
     const barbershopData = await api.get(`/barbershop/${params.id}`)
 
     const barbershop: Barbershop = barbershopData.data
-    console.log(barbershop)
+    // console.log(barbershop)
 
     // console.log(params)
     return (
@@ -81,14 +82,15 @@ export default async function BarbershopPage({ params }: BarbershopPageProps) {
           {/* SERVIÇOS */}
           <div className="space-y-3 border-b border-solid p-5">
             <h2 className="text-xs font-bold uppercase text-gray-400">Serviços</h2>
-            <div className="space-y-3">
-              {/* {barbershop.services.map((service) => (
-                <ServiceItem
-                  key={service.id}
-                  barbershop={JSON.parse(JSON.stringify(barbershop))}
-                  service={JSON.parse(JSON.stringify(service))}
-                />
-              ))} */}
+            <div className="space-y-3">        
+              {barbershop.services.map((service) => {
+                return (
+                  <ServiceItem
+                   key={service.id}
+                   service={service}
+                  />
+                )
+              })}
             </div>
           </div>
     

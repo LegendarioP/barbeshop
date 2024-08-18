@@ -1,4 +1,4 @@
-interface BarbershopServices {
+export interface BarbershopServices {
     id:          string,         
     name:        string,
     description: string,
