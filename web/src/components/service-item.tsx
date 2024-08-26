@@ -1,6 +1,7 @@
 import { BarbershopServices } from "@/data/barbershop";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 interface ServiceItemProps {
     service: BarbershopServices
@@ -29,6 +30,9 @@ export default function ServiceItem({ service }: ServiceItemProps){
                             currency: "BRL",
                             }).format(Number(service.price))}
                         </p>
+                        <Button variant="secondary" size="sm">
+                            Reservar
+                        </Button>
                     </div>
                 </div>
 
